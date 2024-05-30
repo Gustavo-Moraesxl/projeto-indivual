@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Formulário de Cadastro/Login</title>
+  <link rel="stylesheet" href="./css/login.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet" />
+  <link rel="shortcut icon" href="/web-data-viz/public/assets/imgs/cruz.png" type="image/x-icon">
+
+  <link rel="shortcut icon" href="/public/assets/imgs/cruz.png">
+  <script src="./js/sessao.js"></script>
+
+</head>
+<body>
+
+<div class="main">
+  <input type="checkbox" id="chk" aria-hidden="true" />
+  <div class="signup">
+    <form onsubmit="return cadastrar(event)">
+      <label for="chk" aria-hidden="true">Cadastro</label>
+      <!-- <label  class="label_cadastrado"><a class="a" href="login.html">Ja tenho cadastro</a></label> -->
+      <input type="text" name="name" id="name_input" placeholder="Nome" required />
+      <input type="email" name="email" id="email_input" placeholder="Email" />
+      <input id="senha_input" type="password" name="pswd" placeholder="Senha" required />
+      <input id="confirmacao_senha_input" type="password" name="pswd" placeholder="Confirme a Senha" required />
+      <button type="submit" class="botao">Cadastrar</button>
+      <button type="submit" class="botao" ><a class="a" href="login.html"> Ja tenho Cadastro </a></button>
+    </form>
+    <div id="cardErro" class="error-message">
+      <span id="mensagem_erro"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+  function cadastrar(event) {
+    event.preventDefault();
+    aguardar();
+
+    var nomeVar = document.getElementById('name_input').value;
+    var emailVar = document.getElementById('email_input').value;
+    var senhaVar = document.getElementById('senha_input').value;
+    var confirmacaoSenhaVar = document.getElementById('confirmacao_senha_input').value;
+    var cardErro = document.getElementById('cardErro');
+    var mensagem_erro = document.getElementById('mensagem_erro');
+
+    if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = "Por favor, preencha todos os campos.";
+      finalizarAguardar();
+      return false;
+    } else if (senhaVar !== confirmacaoSenhaVar) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = "As senhas não coincidem.";
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+      }),
+    })
+    .then(function (resposta) {
+      if (resposta.ok) {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para a tela de login...";
+        setTimeout(() => {
+          window.location = "login.html";
+        }, 2000);
+        limparFormulario();
+        finalizarAguardar();
+      } else {
+        throw "Houve um erro ao tentar realizar o cadastro!";
+      }
+    })
+    .catch(function (resposta) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = `#ERRO: ${resposta}`;
+      finalizarAguardar();
+    });
+
+    return false;
+  }
+
+  function sumirMensagem() {
+    document.getElementById('cardErro').style.display = "none";
+  }
+
+  function aguardar() {
+    // Função fictícia para aguardar a execução do cadastro
+  }
+
+  function finalizarAguardar() {
+    // Função fictícia para finalizar a espera após o cadastro
+  }
+
+  function limparFormulario() {
+    document.getElementById('name_input').value = "";
+    document.getElementById('email_input').value = "";
+    document.getElementById('senha_input').value = "";
+    document.getElementById('confirmacao_senha_input').value = "";
+  }
+</script>
+
+</body>
+</html>

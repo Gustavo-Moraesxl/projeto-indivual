@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz sobre Racionais MC's</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Quiz sobre Racionais MC's</h1>
+        <form id="quiz_form" class="quiz-form">
+            <div class="question">
+                <p>1. Em que ano foi formado o grupo Racionais MC's?</p>
+                <select id="q1option">
+                    <option value="errado">Coloque a resposta</option>
+                    <option value="certo">1988</option>
+                    <option value="errado">1990</option>
+                    <option value="errado">1992</option>
+                    <option value="errado">1994</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>2. Qual é o nome do álbum lançado em 1997 que é considerado um marco do rap nacional?</p>
+                <select id="q2option">
+                    <option value="errado">Coloque a resposta</option>
+                    <option value="certo">Sobrevivendo no Inferno</option>
+                    <option value="errado">Raio X Brasil</option>
+                    <option value="errado">Nada Como Um Dia Após o Outro Dia</option>
+                    <option value="errado">Cores e Valores</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>3. Qual destes é um membro do Racionais MC's?</p>
+                <select id="q3option">
+                    <option value="errado">Coloque uma resposta</option>
+                    <option value="errado">Leandro Roque de Oliveira</option>
+                    <option value="certo">Pedro Paulo Soares Pereira</option>
+                    <option value="errado">José Tiago</option>
+                    <option value="errado">Marcos Fernandes</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>4. Qual é o nome do álbum lançado em 1994 que contém a música "Diário de um Detento"?</p>
+                <select id="q4option">
+                    <option value="errado">Coloque a resposta</option>
+                    <option value="certo">Raio X Brasil</option>
+                    <option value="errado">Nada Como Um Dia Após o Outro Dia</option>
+                    <option value="errado">Sobrevivendo no Inferno</option>
+                    <option value="errado">Cores e Valores</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>5. Qual é o nome do álbum lançado em 2002 que contém a música "Capítulo 4, Versículo 3"?</p>
+                <select id="q5option">
+                    <option value="errado">Coloque a resposta</option>
+                    <option value="errado">Raio X Brasil</option>
+                    <option value="errado">Nada Como Um Dia Após o Outro Dia</option>
+                    <option value="certo">Nada Como Um Dia Após o Outro Dia</option>
+                    <option value="errado">Sobrevivendo no Inferno</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>6. Em que cidade o grupo Racionais MC's foi formado?</p>
+                <select id="q6option">
+                    <option value="errado">Coloque a resposta</option>
+                    <option value="certo">São Paulo</option>
+                    <option value="errado">Rio de Janeiro</option>
+                    <option value="errado">Belo Horizonte</option>
+                    <option value="errado">Curitiba</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>7. Qual é o nome do primeiro álbum de estúdio do Racionais MC's?</p>
+                <select id="q7option">
+                    <option value="errado">Coloque a resposta</option>
+                    <option value="errado">Sobrevivendo no Inferno</option>
+                    <option value="errado">Raio X Brasil</option>
+                    <option value="errado">Nada Como Um Dia Após o Outro Dia</option>
+                    <option value="certo">Holocausto Urbano</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>8. Qual é o nome do integrante do Racionais MC's que ficou conhecido como Ice Blue?</p>
+                <select id="q8option">
+                    <option value="errado">Coloque a resposta</option>
+                    <option value="errado">Mano Brown</option>
+                    <option value="certo">Paulo Eduardo Salvador</option>
+                    <option value="errado">Edi Rock</option>
+                    <option value="errado">Kl Jay</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>9. Qual é o nome do álbum lançado pelo Racionais MC's em 2001?</p>
+                <select id="q9option">
+                    <option value="errado">Coloque a resposta</option>
+                    <option value="errado">Sobrevivendo no Inferno</option>
+                    <option value="errado">Raio X Brasil</option>
+                    <option value="certo">10 Anos na Estrada</option>
+                    <option value="errado">Nada Como Um Dia Após o Outro Dia</option>
+                </select>
+            </div>
+            <div class="question">
+                <p>10. Qual é o nome da produtora fundada por Mano Brown em 1993?</p>
+                <select id="q10option">
+                    <option value="errado">Coloque a resposta</option>
+                    <option value="certo">Cosa Nostra</option>
+                    <option value="errado">Boogie Naipe</option>
+                    <option value="errado">Laboratório Fantasma</option>
+                    <option value="errado">Som Livre</option>
+                </select>
+            </div>
+            <button type="button" onclick="quiz()">Enviar</button>
+            
+        </form>
+          
+          <div id="result">
+          </div>        
+            
+            
+  </body>
+</html>
+<script>
+    let score = 0;
+      const listaPergunta = [];
+      function quiz() {
+          // Obter respostas do formulário
+          let q1 = q1option.value;
+          let q2 = q2option.value;
+          let q3 = q3option.value;
+          let q4 = q4option.value;
+          let q5 = q5option.value;
+          let q6 = q6option.value;
+          let q7 = q7option.value;
+          let q8 = q8option.value;
+          let q9 = q9option.value;
+          let q10 = q10option.value;
+          
+          listaPergunta.push(q1, q2, q3,q4,q5,q6,q7,q8,q9,q10);
+          
+          
+          let qtdQuestao = 1;
+          for (; qtdQuestao <= 10; qtdQuestao++) {
+              if (listaPergunta[qtdQuestao - 1] == "certo") {
+                  score += 1;
+                }
+            }
+            quiz_form.style.display = 'none';     
+            
+            result.style.display = 'block';
+            result.innerHTML = `Você acertou ${score} de 10 perguntas.
+            <button type="button" onclick="execut()">Enviar Resultados</button>`;
+        }
+        function execut(){
+            var usuarioVar = sessionStorage.getItem('ID_USUARIO');
+            if (!usuarioVar) {
+                alert('Erro: ID do usuário não encontrado!');
+                return; // Pare a execução se o ID do usuário não existir
+            }
+            fetch("/quiz/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                usuarioServer: usuarioVar,
+                acertosServer: score,
+            }),
+        })
+        .then(resposta => {
+            if (resposta.ok) {
+                return resposta.json(); 
+            } else {
+                throw new Error('Erro ao enviar dados!');
+            }
+        })
+        .then(dados => {
+            console.log('Dados enviados com sucesso:', dados);
+            setTimeout(() => {
+                window.location = "./dashboard/cards.html";
+            }, 2000);
+        })
+        .catch(erro => {
+            console.error('Erro ao enviar dados:', erro);
+            alert('Erro ao enviar os resultados! Tente novamente mais tarde.');
+        });
+        
+    return false;
+  
+      }
+    // Esconder o formulário
+    </script>
