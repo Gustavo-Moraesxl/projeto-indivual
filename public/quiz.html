@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz sobre Racionais MC's</title>
     <link rel="stylesheet" href="./css/styles.css">
 </head>
+
 <body>
     <div class="quiz-container">
         <h1>Quiz sobre Racionais MC's</h1>
@@ -111,53 +113,52 @@
                 </select>
             </div>
             <button type="button" onclick="quiz()">Enviar</button>
-            
+
         </form>
-          
-          <div id="result">
-          </div>        
-            
-            
-  </body>
+
+        <div id="result">
+        </div>
+
+
+</body>
+
 </html>
 <script>
     let score = 0;
-      const listaPergunta = [];
-      function quiz() {
-          // Obter respostas do formulário
-          let q1 = q1option.value;
-          let q2 = q2option.value;
-          let q3 = q3option.value;
-          let q4 = q4option.value;
-          let q5 = q5option.value;
-          let q6 = q6option.value;
-          let q7 = q7option.value;
-          let q8 = q8option.value;
-          let q9 = q9option.value;
-          let q10 = q10option.value;
-          
-          listaPergunta.push(q1, q2, q3,q4,q5,q6,q7,q8,q9,q10);
-          
-          
-          let qtdQuestao = 1;
-          for (; qtdQuestao <= 10; qtdQuestao++) {
-              if (listaPergunta[qtdQuestao - 1] == "certo") {
-                  score += 1;
-                }
+    const listaPergunta = [];
+    function quiz() {                // Obter respostas do formulário
+        let q1 = q1option.value;
+        let q2 = q2option.value;
+        let q3 = q3option.value;
+        let q4 = q4option.value;
+        let q5 = q5option.value;
+        let q6 = q6option.value;
+        let q7 = q7option.value;
+        let q8 = q8option.value;
+        let q9 = q9option.value;
+        let q10 = q10option.value;
+
+        listaPergunta.push(q1, q2, q3, q4, q5, q6, q7, q8, q9, q10);
+
+
+        let qtdQuestao = 1;
+        for (; qtdQuestao <= 10; qtdQuestao++) {
+            if (listaPergunta[qtdQuestao - 1] == "certo") {
+                score += 1;
             }
-            quiz_form.style.display = 'none';     
-            
-            result.style.display = 'block';
-            result.innerHTML = `Você acertou ${score} de 10 perguntas.
-            <button type="button" onclick="execut()">Enviar Resultados</button>`;
         }
-        function execut(){
-            var usuarioVar = sessionStorage.getItem('ID_USUARIO');
-            if (!usuarioVar) {
-                alert('Erro: ID do usuário não encontrado!');
-                return; // Pare a execução se o ID do usuário não existir
-            }
-            fetch("/quiz/cadastrar", {
+        quiz_form.style.display = 'none';
+
+        result.style.display = 'block';
+        result.innerHTML = `Você acertou ${score} de 10 perguntas.
+        <button type="button" onclick="teste()">Enviar   Resultados</button>`;
+
+
+    }
+
+    function teste() {
+        var usuarioVar = sessionStorage.ID_USUARIO;
+        fetch("/quiz/cadastrar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -167,26 +168,32 @@
                 acertosServer: score,
             }),
         })
-        .then(resposta => {
-            if (resposta.ok) {
-                return resposta.json(); 
-            } else {
-                throw new Error('Erro ao enviar dados!');
-            }
-        })
-        .then(dados => {
-            console.log('Dados enviados com sucesso:', dados);
-            setTimeout(() => {
-                window.location = "./dashboard/cards.html";
-            }, 2000);
-        })
-        .catch(erro => {
-            console.error('Erro ao enviar dados:', erro);
-            alert('Erro ao enviar os resultados! Tente novamente mais tarde.');
-        });
-        
-    return false;
-  
-      }
+            .then(function (resposta) {
+                console.log(resposta)
+                console.log(usuarioVar,score)
+                if (resposta.ok) {
+                    console.log("pontuacao validada")
+                }
+                else if (resposta.status == 404) {
+                    window.alert("deu erro")
+                }
+
+                else {
+
+                    throw new Error('Erro ao enviar dados!');
+                }
+            })
+            .catch(erro => {
+                console.error('Erro ao enviar dados:', erro);
+                alert('Erro ao enviar os resultados! Tente novamente mais tarde.');
+            });
+
+        return false;
+        // if (!usuarioVar) {
+        //     alert('Erro: ID do usuário não encontrado!');
+        //     return; // Pare a execução se o ID do usuário não existir
+        // }
+
+    }
     // Esconder o formulário
-    </script>
+</script>

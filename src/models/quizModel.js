@@ -41,30 +41,16 @@ function listar(req, res) {
 
 }
 
-function cadastrar(req, res) {
-    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-    var usuario_id = req.body.usuarioServer;
-    var acertos = req.body.acertosServer;
-
-    // Faça as validações dos valores
-    if (usuario_id == undefined) {
-        res.status(400).send("Seu nome está undefined!");
-    } else if (acertos == undefined) {
-        res.status(400).send("Seu email está undefined!");
-    }   else {
-
-        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        quizModel.cadastrar(usuario_id,acertos)
-            .then(
-                function (resultado) {
-                    res.json(resultado);
-                }
-            ).catch(
-                function (erro) {
-                    handleError(res, erro);
-                }
-            );
-    }
+function cadastrar(usuario_id,acertos) {
+    console.log("bryan lindo");
+    
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucaoSql = `
+        INSERT INTO quiz (usuario_id, acertos) VALUES ('${usuario_id}', '${acertos}');
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
 module.exports = {
