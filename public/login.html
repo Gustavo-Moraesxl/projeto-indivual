@@ -38,78 +38,161 @@
     </div>
   </div>
 
-  <div id="div_aguardar" style="display: none;">Aguardando...</div>
+  <div id="div_aguardar" style="display: none;color: red;">Aguardando...</div>
   <div id="div_erros_login" style="display: none; color: red;"></div>
 
   <script>
     function entrar() {
-      aguardar();
+    //   aguardar();
 
-      var emailVar = document.getElementById("email_input").value;
-      var senhaVar = document.getElementById("senha_input").value;
+    //   var emailVar = document.getElementById("email_input").value;
+    //   var senhaVar = document.getElementById("senha_input").value;
 
-      if (emailVar === "" || senhaVar === "") {
-        mostrarErro("Por favor, preencha todos os campos.");
-        finalizarAguardar();
-        return false;
-      } else {
-        setTimeout(sumirMensagem, 5000);
-      }
+    //   if (emailVar === "" || senhaVar === "") {
+    //     mostrarErro("Por favor, preencha todos os campos.");
+    //     finalizarAguardar();
+    //     return false;
+    //   } else {
+    //     setTimeout(sumirMensagem, 5000);
+    //   }
 
-      fetch("/usuarios/autenticar", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          emailServer: emailVar,
-          senhaServer: senhaVar,
-        }),
-      })
-      .then(function (resposta) {
-        if (resposta.ok) {
-          resposta.json().then((json) => {
-            sessionStorage.EMAIL_USUARIO = json.email;
-            sessionStorage.NOME_USUARIO = json.nome;
-            sessionStorage.ID_USUARIO = json.id;
+    //   console.log("Enviando requisição para /usuarios/autenticar com:", {
+    //     emailServer: emailVar,
+    //     senhaServer: senhaVar,
+        
+    //   });
 
-            setTimeout(function () {
-              window.location = "quiz.html";
-            }, 1000);
-          });
-        } else {
-          resposta.text().then((texto) => {
-            mostrarErro(texto);
-            finalizarAguardar();
-          });
-        }
-      })
-      .catch(function (erro) {
-        console.error(erro);
-        finalizarAguardar();
-      });
+    //   fetch("/usuarios/autenticar", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       emailServer: emailVar,
+    //       senhaServer: senhaVar,
+    //     }),
+    //   })
+    //   .then(function (resposta) {
+    //     console.log("Recebido resposta:", resposta);
+    //     if (resposta.ok) {
+    //       resposta.json().then((json) => {
+    //         console.log("Resposta JSON:", json);
+    //         sessionStorage.EMAIL_USUARIO = json.email;
+    //         sessionStorage.NOME_USUARIO = json.nome;
+    //         sessionStorage.ID_USUARIO = json.id;
 
+    //         setTimeout(function () {
+    //           window.location = "quiz.html";
+    //         }, 1000);
+    //       });
+    //     } else {
+    //       resposta.text().then((texto) => {
+    //         console.error("Erro de autenticação:", texto);
+    //         mostrarErro(texto);
+    //         finalizarAguardar();
+    //       });
+    //     }
+    //   })
+    //   .catch(function (erro) {
+    //     console.error("Erro na requisição fetch:", erro);
+    //     mostrarErro("Erro na conexão. Tente novamente mais tarde.");
+    //     finalizarAguardar();
+    //   });
+
+    //   return false;
+    // }
+
+    // function aguardar() {
+    //   document.getElementById("div_aguardar").style.display = "block";
+    // }
+
+    // function finalizarAguardar() {
+    //   document.getElementById("div_aguardar").style.display = "none";
+    // }
+
+    // function mostrarErro(mensagem) {
+    //   var divErro = document.getElementById("div_erros_login");
+    //   divErro.style.display = "block";
+    //   divErro.innerHTML = mensagem;
+    // }
+
+    // function sumirMensagem() {
+    //   var divErro = document.getElementById("div_erros_login");
+    //   divErro.style.display = "none";
+    // 
+
+    
+        
+    // aguardar();
+
+    var emailVar = email_input.value;
+    var senhaVar = senha_input.value;
+
+    if (emailVar == "" || senhaVar == "") {
+      modalTitle.innerHTML = `Erro ao Logar!`
+      modalTxt.innerHTML = `Preencha os campos corretamente!`;
+      modal.showModal();
+      // finalizarAguardar();
       return false;
     }
-
-    function aguardar() {
-      document.getElementById("div_aguardar").style.display = "block";
+    else {
+      // setInterval(sumirMensagem, 5000)
     }
 
-    function finalizarAguardar() {
-      document.getElementById("div_aguardar").style.display = "none";
-    }
+    console.log("FORM LOGIN: ", emailVar);
+    console.log("FORM SENHA: ", senhaVar);
 
-    function mostrarErro(mensagem) {
-      var divErro = document.getElementById("div_erros_login");
-      divErro.style.display = "block";
-      divErro.innerHTML = mensagem;
-    }
+    fetch("/usuarios/autenticar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        emailServer: emailVar,
+        senhaServer: senhaVar
+      })
+    }).then(function (resposta) {
+      console.log("ESTOU NO THEN DO entrar()!")
+
+      if (resposta.ok) {
+        console.log(resposta);
+
+        resposta.json().then(json => {
+          console.log(json);
+          console.log(JSON.stringify(json));
+          sessionStorage.EMAIL_USUARIO = json.email;
+          sessionStorage.NOME_USUARIO = json.nome;
+          sessionStorage.ID_USUARIO = json.idUsuario;
+          // sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+
+          setTimeout(function () {
+            window.location = "quiz.html";
+          }, 1000); // apenas para exibir o loading
+
+        });
+
+      } else {
+
+        console.log("Houve um erro ao tentar realizar o login!");
+
+        resposta.text().then(texto => {
+          console.error(texto);
+          // finalizarAguardar(texto);
+        });
+      }
+
+    }).catch(function (erro) {
+      console.log(erro);
+    })
+
+    return false;
+  }
+
 
     function sumirMensagem() {
-      var divErro = document.getElementById("div_erros_login");
-      divErro.style.display = "none";
+        cardErro.style.display = "none"
     }
+  
   </script>
 </body>
 </html>

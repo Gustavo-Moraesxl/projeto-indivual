@@ -1,4 +1,4 @@
-var quizModel = require("../models/quizModel");
+var database = require("../database/config");
 
 function handleError(res, error) {
     console.error(error);
