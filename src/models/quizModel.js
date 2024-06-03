@@ -1,45 +1,24 @@
 var database = require("../database/config");
 
-function handleError(res, error) {
-    console.error(error);
-    console.error("\nHouve um erro! Erro: ", error.sqlMessage);
-    res.status(500).json({ error: error.sqlMessage });
+
+function listar(usuario_id){
+    console.log('modelcrisbroxa')
+    var instrucao= `SELECT * FROM quiz 
+    JOin usuario on usuario_id = usuario.id
+    order by acertos desc; 
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao)
+      .then(resultado => {
+        // Se a consulta for bem-sucedida, retorna o resultado
+        return resultado; 
+      })
+      .catch(erro => {
+        // Se a consulta falhar, retorna um erro em JSON
+        return { error: erro.message };
+      });
 }
 
-function listar(req, res) {
-    var email = req.body.emailServer;
-    var senha = req.body.senhaServer;
-
-    if (email == undefined) {
-        res.status(400).send("Seu email está undefined!");
-    } else if (senha == undefined) {
-        res.status(400).send("Sua senha está indefinida!");
-    } else {
-
-        quizModel.listar(email, senha)
-            .then(
-                function (resultadoAutenticar) {
-                    console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
-                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
-
-                    if (resultadoAutenticar.length == 1) {
-                        console.log(resultadoAutenticar);
-
-                        res.json(resultadoAutenticar)                        
-                    } else if (resultadoAutenticar.length == 0) {
-                        res.status(403).send("Credenciais inválidas");
-                    } else {
-                        res.status(403).send("Mais de um usuário com o mesmo login e senha!");
-                    }
-                }
-            ).catch(
-                function (erro) {
-                    handleError(res, erro);
-                }
-            );
-    }
-
-}
 
 function cadastrar(usuario_id,acertos) {
     console.log("bryan lindo");
