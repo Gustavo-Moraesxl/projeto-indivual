@@ -58,7 +58,7 @@ _Front-end feito utilizando:_ <br>
 1. Clone este repositório em sua máquina.
 
 
-1. Crie, no Banco de Dados, as tabelas necessárias para o funcionamento deste projeto.(<a href="src/database/script-tabelas.sql">DemonSlayerBD</a>)
+1. Crie, no Banco de Dados, as tabelas necessárias para o funcionamento deste projeto.(<a href="src/database/script-tabelas.sql">RacionaisDB</a>)
 
 
 3. Adicione as credenciais de Banco de Dados no arquivo **.env** e em **.end.dev**, seguindo as instruções neste.
