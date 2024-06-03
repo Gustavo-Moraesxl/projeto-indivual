@@ -8,28 +8,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AquaTech | Dashboards</title>
     
-    <link rel="stylesheet" href="/public/css/dashboards.css">
+    <!-- <link rel="stylesheet" href="../css/dashboards.css"> -->
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-
     <link
         href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-        
-    <!-- scripts do Chart.js - 2022-1 -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        
-    <!--FONT AWESOME-->
-    <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
+    <!-- Seus cabeçalhos aqui -->
 </head>
 
 <body>
     <div class="header-left">
-        <h1>Racionais</h1>
+        <img class="fotoCruz" src="../assets/imgs/cruz.png" alt="" srcset="">
         <div class="hello">
-            <h3>Olá, <span id="nome_input">nome</span>!</h3>
+            <h3>Olá, <span class="nome_input" id="b_usuario">nome</span>!</h3>
         </div>
 
         <div class="btn-nav-white">
@@ -62,12 +56,10 @@
         <canvas id="myChart1" style="width: 600px; margin-left: 280px; height: 200px;"></canvas>
     </div>
     
+    <!-- Seu corpo HTML aqui -->
 </body>
 
 </html>
-
-
-<script src="chart.js"></script>
 <script>
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
@@ -76,7 +68,7 @@
     window.onload = exibirAquariosDoUsuario();
 
     function exibirAquariosDoUsuario() {
-        var aquarios = JSON.parse(sessionStorage.AQUARIOS);
+        var aquarios = JSON.parse(sessionStorage.ID_USUARIO);
         aquarios.forEach(item => {
             document.getElementById("btnAquario").innerHTML += `
             <button class="btn-chart" onclick="exibirAquario(${item.id})" id="btnAquario${item.id}">${item.descricao}</button>

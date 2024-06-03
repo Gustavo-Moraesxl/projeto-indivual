@@ -173,6 +173,10 @@
                 console.log(usuarioVar,score)
                 if (resposta.ok) {
                     console.log("pontuacao validada")
+                    setTimeout(function () {
+                        window.location = "./dashboard/dashboard.html";
+                    }, 1000); // apenas para exibir o loading
+
                 }
                 else if (resposta.status == 404) {
                     window.alert("deu erro")

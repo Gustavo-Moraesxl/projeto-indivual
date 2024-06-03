@@ -32,30 +32,35 @@
   </div>
 </div>
 
+
+</body>
+</html>
+
 <script>
   function cadastrar(event) {
-    event.preventDefault();
-    aguardar();
+    // event.preventDefault();
+    // aguardar();
 
-    var nomeVar = document.getElementById('name_input').value;
-    var emailVar = document.getElementById('email_input').value;
-    var senhaVar = document.getElementById('senha_input').value;
-    var confirmacaoSenhaVar = document.getElementById('confirmacao_senha_input').value;
+    var nomeVar = name_input.value;
+    var emailVar = email_input.value;
+    var senhaVar = senha_input.value;
+    var confirmacaoSenhaVar = confirmacao_senha_input.value;
     var cardErro = document.getElementById('cardErro');
     var mensagem_erro = document.getElementById('mensagem_erro');
 
     if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML = "Por favor, preencha todos os campos.";
-      finalizarAguardar();
+      // finalizarAguardar();
       return false;
     } else if (senhaVar !== confirmacaoSenhaVar) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML = "As senhas não coincidem.";
-      finalizarAguardar();
+      // finalizarAguardar();
       return false;
     } else {
-      setInterval(sumirMensagem, 5000);
+      alert("else sumir mensagem ?")
+      // setInterval(sumirMensagem, 5000);
     }
 
     fetch("/usuarios/cadastrar", {
@@ -76,40 +81,37 @@
         setTimeout(() => {
           window.location = "login.html";
         }, 2000);
-        limparFormulario();
-        finalizarAguardar();
+        // limparFormulario();
+        // finalizarAguardar();
       } else {
         throw "Houve um erro ao tentar realizar o cadastro!";
       }
     })
     .catch(function (resposta) {
       cardErro.style.display = "block";
-      mensagem_erro.innerHTML = `#ERRO: ${resposta}`;
-      finalizarAguardar();
+      mensagem_erro.innerHTML = `´#ERRO: ${resposta}`;
+      // finalizarAguardar();
     });
 
     return false;
   }
 
-  function sumirMensagem() {
-    document.getElementById('cardErro').style.display = "none";
-  }
+  // function sumirMensagem() {
+  //   document.getElementById('cardErro').style.display = "none";
+  // }
 
-  function aguardar() {
-    // Função fictícia para aguardar a execução do cadastro
-  }
+  // function aguardar() {
+  //   // Função fictícia para aguardar a execução do cadastro
+  // }
 
-  function finalizarAguardar() {
-    // Função fictícia para finalizar a espera após o cadastro
-  }
+  // function finalizarAguardar() {
+  //   // Função fictícia para finalizar a espera após o cadastro
+  // }
 
-  function limparFormulario() {
-    document.getElementById('name_input').value = "";
-    document.getElementById('email_input').value = "";
-    document.getElementById('senha_input').value = "";
-    document.getElementById('confirmacao_senha_input').value = "";
-  }
+  // function limparFormulario() {
+  //   document.getElementById('name_input').value = "";
+  //   document.getElementById('email_input').value = "";
+  //   document.getElementById('senha_input').value = "";
+  //   document.getElementById('confirmacao_senha_input').value = "";
+  // }
 </script>
-
-</body>
-</html>
