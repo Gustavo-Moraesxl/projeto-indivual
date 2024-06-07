@@ -33,12 +33,6 @@ _Front-end feito utilizando:_ <br>
 4. Acesse este repositório no seu terminal (GitBash, VSCode ou PowerShell) e execute os comandos abaixo:
 
 
-Entendi, você gostaria de manter o formato Markdown. Vou adaptar o texto para corresponder ao que você me enviou:
-
-markdown
-Copiar código
-<img src="/public/img/Honoikazuchi_no_Kami.webp" width="600px">
-
 ## Racionais - Projeto de Website
 
 Este projeto tem como propósito mostrar um pouco sobre o Universo de Racionais para aqueles que não conhecem e para os já familiarizados um quiz para desafiar seus conhecimentos. Em um site Web Feito por mim com algumas informações importantes e alguns fatos divertidos sobre a obra.
@@ -85,11 +79,11 @@ _O comando acima irá iniciar seu projeto e efetuar os comandos de acordo com a 
 
 📷 _Capturas de Tela do Projeto_
 
-<img src=""> <br>
+<img src="/public/assets/imgs/Captura de tela 2024-06-04 194730.png"> <br>
 ##
-<img src=""> <br>
+<img src="/public/assets/imgs/Captura de tela 2024-06-07 164059.png"> <br>
 ##
-<img src=""> <br>
+<img src="/public/assets/imgs/Captura de tela 2024-06-07 164321.png"> <br>
 ##   
 
 
